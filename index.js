@@ -13,7 +13,7 @@ app.get("/oi", function (req, res){
 
 // Lista de Informações
 
-const itens = ["A Caçadora", "Michael Myers", "O Espirito"];
+const itens = ["A Caçadora", "Michael Myers", "O Espirito", "Ghostface"];
 
 // Endpoint [GET] /killers READ ALL
 app.get("/killers", function (req, res) {
