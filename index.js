@@ -53,38 +53,42 @@ async function main() {
   });
 
 // Endpoint [GET] /killers/:id - READ BY ID (Pelo ID)
-  app.get("/killers/:id", function(req, res) {
+  app.get("/killers/:id", async function(req, res) {
   //Pegamos o parametro de rota ID
-  const id = req.params.id - 1;
+  const id = req.params.id;
 
   // Acessamos o item pelo indice
-  const item = itens[id];
+  const item = await collection.findOne({
+    _id: new ObjectId(id),
+  });
 
   // Exibimos o item encontrado
   res.send(item);
   });
 
 // Endpoint [PUT] /killers:id - UPDATE BY ID
-  app.put("/killers/:id", function (req, res) {
+  app.put("/killers/:id",  async function (req, res) {
   // Pegamos o parametro de rota ID
-  const id = req.params.id - 1;
+  const id = req.params.id;
 
   // Pegamos o nome enviado no body
-  const item = req.body.nome;
+  const item = req.body;
 
   // Atualizamos com o novo item, na posicao ID da lista de Killers
-  itens[id] = item;
+  await collection.updateOne ({_id: new ObjectId(id)}, {$set: item });
 
   res.send("Item atualizado com sucesso");
   });
 
 // Endpoint [DELETE] /killers/:id - DELETE BY ID
-  app.delete("/killers/:id", function (req, res) {
+  app.delete("/killers/:id", async function (req, res) {
   // Pegamos o parametro de rota ID
-  const id =  req.params.id - 1;
+  const id =  req.params.id;
 
   // Remove o item da lista
-  delete itens[id];
+  await collection.deleteOne({
+    _id: new ObjectId(id),
+  });
 
   // Exibimos uma mensagem de sucesso
   res.send("Item removido com sucesso");
@@ -92,7 +96,7 @@ async function main() {
 
 
   app.listen(3000, function () {
-    console.log("Servidor rodando em http://localhost:3000")
+    console.log("Servidor rodando em http://127.0.0.1:3000")
   });
 }
 
