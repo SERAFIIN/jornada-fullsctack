@@ -69,29 +69,29 @@ async function main() {
 // Endpoint [PUT] /killers:id - UPDATE BY ID
   app.put("/killers/:id",  async function (req, res) {
   // Pegamos o parametro de rota ID
-  const id = req.params.id;
+    const id = req.params.id;
 
   // Pegamos o nome enviado no body
-  const item = req.body;
+    const item = req.body;
 
   // Atualizamos com o novo item, na posicao ID da lista de Killers
-  await collection.updateOne ({_id: new ObjectId(id)}, {$set: item });
+    await collection.updateOne({_id: new ObjectId(id)}, {$set: item });
 
-  res.send("Item atualizado com sucesso");
+    res.send("Item atualizado com sucesso");
   });
 
 // Endpoint [DELETE] /killers/:id - DELETE BY ID
   app.delete("/killers/:id", async function (req, res) {
   // Pegamos o parametro de rota ID
-  const id =  req.params.id;
+    const id =  req.params.id;
 
   // Remove o item da lista
-  await collection.deleteOne({
-    _id: new ObjectId(id),
+    await collection.deleteOne({
+      _id: new ObjectId(id),
   });
 
   // Exibimos uma mensagem de sucesso
-  res.send("Item removido com sucesso");
+    res.send("Item removido com sucesso");
   });
 
 
