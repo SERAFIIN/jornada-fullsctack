@@ -1,7 +1,11 @@
+import { Route, Routes } from "react-router-dom"
+
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 
 import './App.css'
+import ReadAll from "./components/ReadAll/ReadAll"
+import Create from "./components/Create/Create"
 
 function App() {
   
@@ -10,7 +14,11 @@ function App() {
       <Header/>
 
       <div className="content">
-        Conteudo da Página
+        <Routes>
+          <Route path="/" element={<ReadAll/>} />
+          
+          <Route path="/adicionar" element={<Create />} />
+        </Routes>
       </div>
       
       <Footer />
